@@ -15,11 +15,7 @@ public:
         while(temp->next!=NULL){
             mp[temp]++;
             temp=temp->next;
-            for(auto it:mp){
-                if(it.second==2){
-                    return true;
-                }
-            }
+            if(mp[temp]==2) return true;
         }
         return false;
     }
