@@ -17,16 +17,16 @@ private:
 
         bool isValid = false;
         if (str[index] == '*') {
-            isValid |= isValidString(index + 1, openCount + 1, str, memo); // Treat '*' as '('
+            isValid |= isValidString(index + 1, openCount + 1, str, memo);
             if (openCount) {
-                isValid |= isValidString(index + 1, openCount - 1, str, memo); // Treat '*' as ')'
+                isValid |= isValidString(index + 1, openCount - 1, str, memo); 
             }
-            isValid |= isValidString(index + 1, openCount, str, memo); // Treat '*' as empty
+            isValid |= isValidString(index + 1, openCount, str, memo); 
         } else {
             if (str[index] == '(') {
-                isValid = isValidString(index + 1, openCount + 1, str, memo); // Increment count for '('
+                isValid = isValidString(index + 1, openCount + 1, str, memo); 
             } else if (openCount) {
-                isValid = isValidString(index + 1, openCount - 1, str, memo); // Decrement count for ')'
+                isValid = isValidString(index + 1, openCount - 1, str, memo); 
             }
         }
         return memo[index][openCount] = isValid;
