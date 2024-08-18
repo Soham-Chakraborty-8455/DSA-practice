@@ -10,10 +10,15 @@ public:
                 }
             }
         }
-        sort(row.begin(),row.end());
-        sort(col.begin(), col.end());
-        int len= row[row.size()-1] - row[0];
-        int wid= col[col.size()-1] - col[0];
+        int minr=INT_MAX, minc=INT_MAX, maxr=INT_MIN, maxc=INT_MIN;
+        for(int i=0; i<row.size(); i++){
+            minr= min(minr, row[i]);
+            minc= min(minc, col[i]);
+            maxr= max(maxr, row[i]);
+            maxc= max(maxc, col[i]);
+        }
+        int len= maxc-minc;
+        int wid= maxr-minr;
         return (len+1)*(wid+1);
     }
 };
