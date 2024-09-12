@@ -34,7 +34,9 @@ public:
         }
         if(temp1) temp->next= temp1;
         if(temp2) temp->next = temp2;
-        return head->next;
+        ListNode* ans= head->next;
+        delete(head);
+        return ans;
 
     }
 };
