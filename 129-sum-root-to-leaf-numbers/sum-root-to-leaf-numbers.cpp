@@ -1,14 +1,33 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution {
+private:
+    void f(TreeNode* root, int num, vector<int>& paths){
+        if(root==NULL) return;
+        if(root->left==NULL && root->right==NULL){
+            num= 10*num + root->val;
+            paths.push_back(num);
+            return;
+        }
+        num= 10*num + root->val;
+        f(root->left, num, paths);
+        f(root->right, num, paths);
+    }
 public:
     int sumNumbers(TreeNode* root) {
-        return dfs(root, 0);
+        vector<int> paths;
+        f(root, 0, paths);
+        int ans=0;
+        for(auto it: paths) ans+= it;
+        return ans;
     }
-    // preorder dfs traversal
-    int dfs(TreeNode* root, int cur) {
-        if(!root) return 0;
-        cur = cur * 10 + root -> val;                 // append current node's digit
-        if(!root -> left && !root -> right)           // leaf node - return current number to be added to total sum
-            return cur;
-        return dfs(root -> left, cur) + dfs(root -> right, cur);   // recurse for child if current node is not leaf
-    }  
 };
